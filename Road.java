@@ -73,7 +73,7 @@ public class Road {
 
 			System.out.print ("\rMoving Car from [" + car.current.y + ", " + car.current.x + "] (#" + i + " of "  + cars.size () + ") in the " + this.direction + " road");
 			Main.world.map[car.current.x][car.current.y].valid = true;
-			int status = car.move(true);
+			int status = car.aStar(true);
 
 
 
