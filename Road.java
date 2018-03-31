@@ -43,10 +43,10 @@ public class Road {
 
 	}
 
-	public Road (String direction, int x, int y, int width, int height, boolean semaphoreAsGoal) {
+	/*public Road (String direction, int x, int y, int width, int height, boolean semaphoreAsGoal) {
 		this (direction, x, y, width, height);
 		this.semaphoreAsGoal = semaphoreAsGoal;
-	}
+	}*/
 
 	// Utility function used to tell which portion of the road is actually the
 	// one before the semaphore since only there cars can be added.
@@ -92,30 +92,6 @@ public class Road {
 			}
 		}
 		cars = left;
-	}
-
-	public void flowFree () {
-		/*ArrayList<Car> left = new ArrayList<Car> ();
-		int i = 1;
-		for (Car car : cars) {
-			if (width < height) {
-				if (car.current.x > initialPoint[0] + actualSize[0] + 1) {
-					boolean ended = car.move (true);
-					if (!ended) {
-						left.add (car);
-					}
-				}
-			} else {
-				/*if (car.current.x > initialPoint[0] + actualSize[0] + 1) {
-					boolean ended = car.move (true);
-					if (!ended) {
-						left.add (car);
-					}
-				}
-			}
-
-		}
-		cars = left;*/
 	}
 
 	public void spawn (int x, int y) {

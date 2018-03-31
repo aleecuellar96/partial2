@@ -25,7 +25,7 @@ public class World {
 	}
 
 
-	public World (int width, int height, boolean limit) {
+	/*public World (int width, int height, boolean limit) {
 		this.width = height;
 		this.height = width;
 		this.limited = limit;
@@ -80,9 +80,9 @@ public class World {
 			}
 		}
 
-	}
+	}*/
 
-	public World (int template[][]) {
+	/*public World (int template[][]) {
 
 		this.width = template[0].length;
 		this.height = template.length;
@@ -116,7 +116,7 @@ public class World {
 		}
 	}
 
-	public static ArrayList<int[]> randomRoom (int seed) {
+	/*public static ArrayList<int[]> randomRoom (int seed) {
 		ArrayList<int[]> positions = new ArrayList<int[]> ();
 		switch (seed) {
 			case 0:
@@ -186,7 +186,7 @@ public class World {
 		}
 
 		return positions;
-	}
+	}*/
 
 	@Override
 	public String toString () {

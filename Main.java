@@ -51,11 +51,11 @@ public class Main {
 		// Create a new Road that goes from (40, 0) to (60, 99)
 		// Those two coordinates form a rectangle, the first coordinate
 		// being the left-top corner and the second one the right-bottom one.
-		Road north_south = new Road ("North - South", 40, 0, 19, 99, false);
+		Road north_south = new Road ("North - South", 40, 0, 19, 99);
 		north_south.setActualSize (20, 40);
 
 		// Create a new Road that goes from (0, 40) to (99, 60)
-		Road west_east = new Road ("West - East", 0, 40, 99, 19, false);
+		Road west_east = new Road ("West - East", 0, 40, 99, 19);
 		west_east.setActualSize (40, 20);
 
 		/*CrossRoad crossing = new CrossRoad (4, 2);
@@ -86,51 +86,21 @@ public class Main {
 		// it handles
 		LightScheme light = new LightScheme ();
 
-		//light.limits = new int[2];
-		//light.limits[0] = 55;
-		//light.limits[1] = 80;
-
-		//light.minTime = 35;
-		//light.maxTime = 80;
-
-		//light.minCars = 0;
-		//light.maxCars = 853;
-
 		// Create the Medium Scheme that the Semaphore will use and set all of
 		// it's limits. From the function limits (limits) to the time and cars
 		// it handles
 		MediumScheme medium = new MediumScheme ();
-		//medium.limits = new int[4];
-		//medium.limits[0] = 55;
-		//medium.limits[1] = 80;
-		//medium.limits[2] = 105;
-		//medium.limits[3] = 130;
-
-		//medium.minTime = 55;
-		//medium.maxTime = 130;
-
-		//medium.minCars = 586;
-		//medium.maxCars = 1386;
 
 		// Create the Heavy Scheme that the Semaphore will use and set all of
 		// it's limits. From the function limits (limits) to the time and cars
 		// it handles
 		HeavyScheme heavy = new HeavyScheme ();
-		//heavy.limits = new int[2];
-		//heavy.limits[0] = 105;
-		//heavy.limits[1] = 130;
-
-		//heavy.minTime = 105;
-		//heavy.maxTime = 150;
-
-		//heavy.minCars = 1120;
-		//heavy.maxCars = 1600;
 
 		// Add the Schemes to the Semaphore of the crossroad
 		crossing.semaphore.addScheme (light);
 		crossing.semaphore.addScheme (medium);
 		crossing.semaphore.addScheme (heavy);
-		crossing.semaphore.minTime = 35;
+		crossing.semaphore.startTime = 35;
 
 		crossing.semaphore.target = 0;
 

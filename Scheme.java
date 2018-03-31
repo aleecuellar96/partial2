@@ -16,14 +16,18 @@ public class Scheme{
 	}
 
 	public boolean handles (int traffic) {
-		return (traffic >= this.minCars && traffic <= this.maxCars);
+		if(traffic <= this.maxCars && traffic >= this.minCars){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public double membership (double time) {
 		return 0;
 	}
 
-	public double centerOfMass (int lowerLimit) {
+	public double centerOfMass (int lowerLimit) { //cambiarlo
 		int upperLimit = limits[limits.length - 1];
 		double sum = 0;
 		for (int i = lowerLimit; i <= upperLimit; i++) {

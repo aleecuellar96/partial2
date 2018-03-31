@@ -2,11 +2,11 @@ import java.util.*;
 
 public class Semaphore {
 
-	public double minTime;
+	public double startTime;
 	public ArrayList<Scheme> schemes;
 
 	public double time;
-	public double speed;
+	//public double speed;
 
 	public Scheme currentScheme;
 
@@ -20,7 +20,7 @@ public class Semaphore {
 		schemes = new ArrayList<Scheme> ();
 	}
 
-	public void addScheme (Scheme scheme) {
+	public void addScheme (Scheme scheme) { //change name
 		schemes.add (scheme);
 	}
 
@@ -40,9 +40,9 @@ public class Semaphore {
 	// Function to map any given amount of traffic to time
 	public double mapTrafficToTime (int traffic) {
 		Scheme scheme = schemeFor (traffic);
-		double temp = Math.floor(traffic * (scheme.maxTime / scheme.maxCars));
-		if (temp < minTime) {
-			temp = minTime;
+		double temp = Math.floor((0.078125*traffic)+35);
+		if (temp < startTime) {
+			temp = startTime;
 		}
 		return temp;
 	}
@@ -80,37 +80,7 @@ public class Semaphore {
 			this.time = currentScheme.centerOfMass((int)timeFromTraffic);
 		}
 
-		this.speed =  (currentScheme.maxTime / currentScheme.maxCars);
-
-
-		/*for (int i = 0; i < scores.length; i++) {
-			if (scores[i] > 0 && schemes.get(i).level != currentScheme.level) {
-				System.out.println (schemes.get(i).centerOfMass ((int) timeFromTraffic, scores[i]));
-			} else if (scores[i] == 1 && schemes.get(i).level == currentScheme.level) {
-					System.out.println (schemes.get(i).centerOfMass ((int) timeFromTraffic, scores[i]));
-			}
-		}
-
-		// Check what scheme the given traffic belongs to and change if necessary
-		Scheme higher = currentScheme;
-		double score = higher.membership (timeFromTraffic);
-
-	for (Scheme scheme : schemes) {
-			double tempScore = scheme.membership (timeFromTraffic);
-			if (tempScore > score) {
-				higher = scheme;
-				score = tempScore;
-			}
-		}
-
-
-		// If the scheme with the highest belonging score is not the same
-		// as the current scheme, change them.
-		if  (!currentScheme.name.equals (higher.name)) {
-			currentScheme = higher;
-			this.speed =  (higher.maxTime / higher.maxCars);
-		}
-		this.time = currentScheme.centerOfMass((int)timeFromTraffic);*/
+		//this.speed =  (currentScheme.maxTime / currentScheme.maxCars);
 	}
 
 	// Swap from one lane to the other.
