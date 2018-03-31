@@ -19,7 +19,18 @@ public class Main {
 		crossing.spawn (202, 1);
 		world = crossing;
 
-		semaphoreSettings ();
+		//semaphore
+		crossing = (CrossRoad) world;
+		LightScheme light = new LightScheme ();
+		MediumScheme medium = new MediumScheme ();
+		HeavyScheme heavy = new HeavyScheme ();
+		crossing.semaphore.addScheme (light);
+		crossing.semaphore.addScheme (medium);
+		crossing.semaphore.addScheme (heavy);
+		crossing.semaphore.startTime = 35;
+		crossing.semaphore.target = 0;
+		crossing.semaphore.setTimeFromTraffic (crossing.count ());
+		world = crossing;
 
 		// Print the world conditions at the start
 		System.out.println (currentState (true));
@@ -62,7 +73,7 @@ public class Main {
 		world = crossing;
 	}*/
 
-	public static void semaphoreSettings () {
+	/*public static void semaphoreSettings () {
 		CrossRoad crossing = (CrossRoad) world;
 
 		// Create the Light Scheme that the Semaphore will use and set all of
@@ -94,7 +105,7 @@ public class Main {
 
 		//crossing.semaphore.time = 10;
 		world = crossing;
-	}
+	}*/
 
 	public static String currentState (boolean unicodeMap) {
 		CrossRoad crossing = (CrossRoad) world;
