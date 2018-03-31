@@ -7,8 +7,17 @@ public class Main {
 
 	public static void main (String args[]) {
 		File.create ("results.txt");
-		initializeWorld ();
-		//initializeTinyWorld ();
+		//initialize world
+		CrossRoad crossing = new CrossRoad (40, 20);
+		Road north_south = new Road ("North - South", 40, 0, 19, 99);
+		north_south.setActualSize (20, 40);
+		Road west_east = new Road ("West - East", 0, 40, 99, 19);
+		west_east.setActualSize (40, 20);
+		crossing.setRoad (0, west_east);
+		crossing.setRoad (1, north_south);
+		crossing.spawn (517, 0);
+		crossing.spawn (202, 1);
+		world = crossing;
 
 		semaphoreSettings ();
 
@@ -25,25 +34,7 @@ public class Main {
 		System.out.println (world);
 	}
 
-	public static void initializeTinyWorld () {
-
-		CrossRoad crossing = new CrossRoad (4, 2);
-
-		Road north_south = new Road ("North - South", 5, 0, 1, 9);
-		north_south.setActualSize (2, 4);
-		Road west_east = new Road ("West - East", 0, 4, 9, 1);
-		west_east.setActualSize (4, 2);
-		crossing.setRoad (0, west_east);
-		crossing.setRoad (1, north_south);
-
-		crossing.spawn (4, 0);
-		crossing.spawn (3, 1);
-
-		world = crossing;
-
-	}
-
-	public static void initializeWorld () {
+	/*public static void initializeWorld () {
 
 		// Create a new crossing world with Streets of 40x20 places.
 		CrossRoad crossing = new CrossRoad (40, 20);
@@ -58,13 +49,6 @@ public class Main {
 		Road west_east = new Road ("West - East", 0, 40, 99, 19);
 		west_east.setActualSize (40, 20);
 
-		/*CrossRoad crossing = new CrossRoad (4, 2);
-
-		Road north_south = new Road ("North - South", 5, 0, 1, 9);
-		north_south.setActualSize (2, 4);
-		Road west_east = new Road ("West - East", 0, 4, 9, 1);
-		west_east.setActualSize (4, 2);*/
-
 		// Add each road to the crossroad with an specific ID
 		crossing.setRoad (0, west_east);
 		crossing.setRoad (1, north_south);
@@ -76,7 +60,7 @@ public class Main {
 		crossing.spawn (202, 1);
 
 		world = crossing;
-	}
+	}*/
 
 	public static void semaphoreSettings () {
 		CrossRoad crossing = (CrossRoad) world;
