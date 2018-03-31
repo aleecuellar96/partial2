@@ -1,10 +1,17 @@
 public class LightScheme extends Scheme {
 
-	public LightScheme (String name, int level) {
-		super (name, level);
+	public LightScheme () {
+		this.name = "LightScheme";
+		this.level = 0;
+		limits = new int[2];
+		limits[0] = 55;
+		limits[1] = 80;
+		minTime = 35;
+		maxTime = 80;
+		minCars = 0;
+		maxCars = 853;
 	}
 
-	@Override
 	public double membership (double time) {
 		if (time <= limits[0]) {
 			return 1;

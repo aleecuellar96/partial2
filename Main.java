@@ -84,47 +84,47 @@ public class Main {
 		// Create the Light Scheme that the Semaphore will use and set all of
 		// it's limits. From the function limits (limits) to the time and cars
 		// it handles
-		LightScheme light = new LightScheme ("Light Scheme", 0);
+		LightScheme light = new LightScheme ();
 
-		light.limits = new int[2];
-		light.limits[0] = 55;
-		light.limits[1] = 80;
+		//light.limits = new int[2];
+		//light.limits[0] = 55;
+		//light.limits[1] = 80;
 
-		light.minTime = 35;
-		light.maxTime = 80;
+		//light.minTime = 35;
+		//light.maxTime = 80;
 
-		light.minCars = 0;
-		light.maxCars = 853;
+		//light.minCars = 0;
+		//light.maxCars = 853;
 
 		// Create the Medium Scheme that the Semaphore will use and set all of
 		// it's limits. From the function limits (limits) to the time and cars
 		// it handles
-		MediumScheme medium = new MediumScheme ("Medium Scheme", 1);
-		medium.limits = new int[4];
-		medium.limits[0] = 55;
-		medium.limits[1] = 80;
-		medium.limits[2] = 105;
-		medium.limits[3] = 130;
+		MediumScheme medium = new MediumScheme ();
+		//medium.limits = new int[4];
+		//medium.limits[0] = 55;
+		//medium.limits[1] = 80;
+		//medium.limits[2] = 105;
+		//medium.limits[3] = 130;
 
-		medium.minTime = 55;
-		medium.maxTime = 130;
+		//medium.minTime = 55;
+		//medium.maxTime = 130;
 
-		medium.minCars = 586;
-		medium.maxCars = 1386;
+		//medium.minCars = 586;
+		//medium.maxCars = 1386;
 
 		// Create the Heavy Scheme that the Semaphore will use and set all of
 		// it's limits. From the function limits (limits) to the time and cars
 		// it handles
-		HeavyScheme heavy = new HeavyScheme ("Heavy Scheme", 2);
-		heavy.limits = new int[2];
-		heavy.limits[0] = 105;
-		heavy.limits[1] = 130;
+		HeavyScheme heavy = new HeavyScheme ();
+		//heavy.limits = new int[2];
+		//heavy.limits[0] = 105;
+		//heavy.limits[1] = 130;
 
-		heavy.minTime = 105;
-		heavy.maxTime = 150;
+		//heavy.minTime = 105;
+		//heavy.maxTime = 150;
 
-		heavy.minCars = 1120;
-		heavy.maxCars = 1600;
+		//heavy.minCars = 1120;
+		//heavy.maxCars = 1600;
 
 		// Add the Schemes to the Semaphore of the crossroad
 		crossing.semaphore.addScheme (light);

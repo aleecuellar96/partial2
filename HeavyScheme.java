@@ -1,10 +1,17 @@
 public class HeavyScheme extends Scheme {
 
-	public HeavyScheme (String name, int level) {
-		super (name, level);
+	public HeavyScheme () {
+		this.name = "HeavyScheme";
+		this.level = 2;
+		limits = new int[2];
+		limits[0] = 105;
+		limits[1] = 130;
+		minTime = 105;
+		maxTime = 150;
+		minCars = 1120;
+		maxCars = 1600;
 	}
 
-	@Override
 	public double membership (double time) {
 		if (time <= limits[0]) {
 			return 0;

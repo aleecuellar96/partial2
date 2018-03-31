@@ -1,6 +1,6 @@
-public class Scheme implements SchemeInterface {
+public class Scheme{
 
-	public String name;
+	public String name; //podria quitar esta
 	public int level;
 
 	public double minTime;
@@ -12,9 +12,7 @@ public class Scheme implements SchemeInterface {
 
 	public int[] limits;
 
-	public Scheme (String name, int level) {
-		this.name = name;
-		this.level = level;
+	public Scheme () {
 	}
 
 	public boolean handles (int traffic) {

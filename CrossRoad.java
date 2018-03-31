@@ -83,16 +83,6 @@ public class CrossRoad extends World {
 					if (car.current.x == x && car.current.y == y) {
 						return i;
 					}
-					/*if (roads[i].width < roads[i].height) {
-						if (car.current.x == x && car.current.y == y) {
-							return i;
-						}
-					} else {
-						if (car.current.x == y && car.current.y == x) {
-							return i;
-						}
-					}*/
-
 				}
 			}
 

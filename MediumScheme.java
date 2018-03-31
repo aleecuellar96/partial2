@@ -1,10 +1,19 @@
 public class MediumScheme extends Scheme {
 
-	public MediumScheme (String name, int level) {
-		super (name, level);
+	public MediumScheme () {
+		this.name = "MediumScheme";
+		this.level = 1;
+		limits = new int[4];
+		limits[0] = 55;
+		limits[1] = 80;
+		limits[2] = 105;
+		limits[3] = 130;
+		minTime = 55;
+		maxTime = 130;
+		minCars = 586;
+		maxCars = 1386;
 	}
 
-	@Override
 	public double membership (double time) {
 		if (time <= limits[0] || time >= limits[3]) {
 			return 0;
