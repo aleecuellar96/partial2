@@ -188,7 +188,7 @@ public class World {
 		return positions;
 	}*/
 
-	@Override
+	/*@Override
 	public String toString () {
 		String result = String.format("Visualization of the %dx%d world.\n\n", width, height);
 		for (int i = 0; i < height; i++) {
@@ -209,5 +209,5 @@ public class World {
 			result += String.format("\nIsn't this kind of boring? Set the random generation limitations to false in the main() method for more fun! :D\n\n");
 		}
 		return result;
-	}
+	}*/
 }
