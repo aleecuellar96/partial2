@@ -2,12 +2,11 @@ import java.util.*;
 
 public class Main {
 
-	// Keep only a copy of the whole world
 	public static CrossRoad crossing;
 
 	public static void main (String args[]) {
 		File.create ("results.txt");
-		//initialize world
+
 		crossing = new CrossRoad (40, 20);
 		Road north_south = new Road ("North - South", 40, 0, 19, 99);
 		north_south.setActualSize (20, 40);
@@ -18,7 +17,6 @@ public class Main {
 		crossing.fillLane (517, 0);
 		crossing.fillLane(202, 1);
 
-		//semaphore
 		LightScheme light = new LightScheme ();
 		MediumScheme medium = new MediumScheme ();
 		HeavyScheme heavy = new HeavyScheme ();
@@ -29,16 +27,8 @@ public class Main {
 		crossing.semaphore.target = 0;
 		crossing.semaphore.setTimeFromTraffic (crossing.getTotal());
 
-		// Print the world conditions at the start
 		System.out.println (currentState (true));
-
-		// Make the cars move
 		flow ();
-
-		// Show a step by step
-		//flow (true, 550);
-
-		// Print the world conditions after car flow
 		System.out.println (crossing);
 	}
 
@@ -66,8 +56,8 @@ public class Main {
 	// Make the cars flow, the first boolean parameter stablishes if it should
 	// be slowed down (true) or if it should run at full speed (false).
 	// For debugging purposes it is best to use false. The second parameter
-	// stablishes how many steps should be run when the speed was slowed down.
-	public static void flow (boolean byStep, int step) {
+	// stablishes how many gets should be run when the speed was slowed down.
+	public static void flow () {
 		CrossRoad crossing2 = (CrossRoad) crossing;
 		double timeCounter = 0;
 		int counter = 0;
@@ -75,7 +65,7 @@ public class Main {
 		while (crossing2.getTotal () > 0) {
 
 			if (timeCounter >= crossing2.semaphore.time) {
-				crossing2.semaphore.swap (crossing2.getTotal());
+				crossing2.semaphore.alternate (crossing2.getTotal());
 
 				timeCounter = 0;
 				counter++;
@@ -84,14 +74,9 @@ public class Main {
 			}
 			crossing2.getRoad(crossing2.semaphore.activeRoad).flow ();
 
-			if (byStep) {
-				timeCounter += crossing2.semaphore.time;
-				if (counter == step) {
-					break;
-				}
-			} else {
-				timeCounter += 1;
-			}
+			
+			timeCounter += 1;
+			
 			totalTime += 1;
 			System.out.flush();
 
@@ -102,7 +87,4 @@ public class Main {
 		System.out.format ("It took %f seconds (%f minutes) and there are %d cars left\n", totalTime, totalTime/60, crossing2.getTotal());
 	}
 
-	public static void flow () {
-		flow (false, 0);
-	}
 }

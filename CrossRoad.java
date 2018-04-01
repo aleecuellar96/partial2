@@ -11,19 +11,15 @@ public class CrossRoad{
 	public int height;
 
 	public Cell map[][];
+	public int index = 0;
 
 	public CrossRoad (int columns, int rows) {
-		// Create a world with size enough for the roads and their continuations
 		createWorld(columns * 2 + rows, columns * 2 + rows);
-
 		roadSize = new int[2];
 		roadSize[0] = columns;
 		roadSize[1] = rows;
-
 		roads = new Road[2];
 		semaphore = new Semaphore ();
-
-		// Set which road has the green light first
 		semaphore.activeRoad = 1;
 		semaphore.inactiveRoad = 0;
 	}
@@ -40,8 +36,7 @@ public class CrossRoad{
 		}
 	}
 
-	// Spawn n number of cars in a given Road by it's ID
-	public void fillLane (int n, int road) {//este sí
+	public void fillLane (int n, int road) {
 		if (road < roads.length) {
 			for (int i = 0; i < n; i++) {
 				roads[road].fill();
@@ -49,9 +44,18 @@ public class CrossRoad{
 		}
 	}
 
-	// Add a new road to the crossroad with a given ID
 	public void setRoad (int index, Road road) {
-		if (index >= 0 && index < 2) {
+		if(index == 0){
+			roads[index] = road;
+			for (int i = 0; i < this.height; i++) {
+				for (int j = 0; j < this.width; j++) {
+					if (j >= road.initialPoint[0] && j <= road.initialPoint[0] + road.width && i >= road.initialPoint[1] && i <= road.initialPoint[1] + road.height) {
+						map[i][j].valid = true;
+					}
+				}
+			}
+			index++;
+		}else{
 			roads[index] = road;
 			for (int i = 0; i < this.height; i++) {
 				for (int j = 0; j < this.width; j++) {
@@ -63,7 +67,6 @@ public class CrossRoad{
 		}
 	}
 
-	// Return a road by it's id
 	public Road getRoad (int index) {
 		if (index < roads.length) {
 			return roads[index];
@@ -71,7 +74,6 @@ public class CrossRoad{
 		return null;
 	}
 
-	// Count the total number of cars in the crossroad
 	public int getTotal () {
 		int count = 0;
 		for (int i = 0; i < roads.length; i++) {
@@ -80,7 +82,6 @@ public class CrossRoad{
 		return count;
 	}
 
-	// Check if any of the roads has a car at the given (x, y) point.
 	public int carAt (int x, int y) {
 		for (int i = 0; i < roads.length; i++) {
 			if (roads[i] != null) {
@@ -122,7 +123,7 @@ public class CrossRoad{
 
 
 	public String toString () {
-		String result = ""; //"There are currently " + count () + "Cars in the crossroad\n";
+		String result = ""; 
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				int road = carAt (i, j);

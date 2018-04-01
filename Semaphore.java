@@ -79,12 +79,9 @@ public class Semaphore {
 		} else {
 			this.time = currentScheme.centerOfMass((int)timeFromTraffic);
 		}
-
-		//this.speed =  (currentScheme.maxTime / currentScheme.maxCars);
 	}
 
-	// Swap from one lane to the other.
-	public void swap (int traffic) {
+	public void alternate (int traffic) {
 		setTimeFromTraffic (traffic);
 		if (activeRoad == 0) {
 			activeRoad = 1;
