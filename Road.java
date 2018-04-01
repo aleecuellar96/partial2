@@ -95,7 +95,7 @@ public class Road {
 	}
 
 	// Spawn a car in the road
-	public boolean spawn () {
+	public boolean fill () {
 
 		// Check if the car still fits in the road, this will start filling
 		// the road from the first column/row following the size and direction

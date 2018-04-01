@@ -1,4 +1,3 @@
-//ya
 public class Cell implements Comparable<Cell> {
 
 	public int x;

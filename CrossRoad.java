@@ -40,22 +40,11 @@ public class CrossRoad{
 		}
 	}
 
-	// Trace a Road in the current map
-	private void traceRoad (Road road) {
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
-				if (j >= road.initialPoint[0] && j <= road.initialPoint[0] + road.width && i >= road.initialPoint[1] && i <= road.initialPoint[1] + road.height) {
-					map[i][j].valid = true;
-				}
-			}
-		}
-	}
-
 	// Spawn n number of cars in a given Road by it's ID
-	public void spawn (int n, int road) {//este sí
+	public void fillLane (int n, int road) {//este sí
 		if (road < roads.length) {
 			for (int i = 0; i < n; i++) {
-				roads[road].spawn ();
+				roads[road].fill();
 			}
 		}
 	}
@@ -64,7 +53,13 @@ public class CrossRoad{
 	public void setRoad (int index, Road road) {
 		if (index >= 0 && index < 2) {
 			roads[index] = road;
-			traceRoad (road);
+			for (int i = 0; i < this.height; i++) {
+				for (int j = 0; j < this.width; j++) {
+					if (j >= road.initialPoint[0] && j <= road.initialPoint[0] + road.width && i >= road.initialPoint[1] && i <= road.initialPoint[1] + road.height) {
+						map[i][j].valid = true;
+					}
+				}
+			}
 		}
 	}
 
@@ -77,7 +72,7 @@ public class CrossRoad{
 	}
 
 	// Count the total number of cars in the crossroad
-	public int count () {
+	public int getTotal () {
 		int count = 0;
 		for (int i = 0; i < roads.length; i++) {
 			count += roads[i].cars.size ();
@@ -131,9 +126,7 @@ public class CrossRoad{
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				int road = carAt (i, j);
-				/*if (road == -1) {
-					road = carAt (j, i);
-				}*/
+
 				if (map[i][j].path) {
 					result += " \u001B[36m◎\u001B[0m ";
 				} else if (road == 1) {

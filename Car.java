@@ -1,4 +1,3 @@
-//ya
 import java.util.*;
 
 public class Car {
@@ -7,10 +6,9 @@ public class Car {
 
 	private List open_list;
 	private List closed_list;
-
+	public Cell current;
 	private Cell start;
 	private Cell goal;
-	public Cell current;
 
 	public Car () {
 		open_list = new List ();
@@ -38,11 +36,6 @@ public class Car {
 		start.f = start.g + start.heuristic (goal);
 	}
 
-
-	// Modified version of the A* Algorithm
-	// Returns -1 when no possible route was found
-	// Returns 1 when it has reached it's destination
-	// Returns 0 when it has moved and there are still moves left
 	public int aStar (boolean repeat) {
 
 		if (open_list.getSize () != 0) {
