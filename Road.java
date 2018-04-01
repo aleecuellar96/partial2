@@ -94,18 +94,6 @@ public class Road {
 		cars = left;
 	}
 
-	public void spawn (int x, int y) {
-		Car car = new Car ();
-		car.setStart (x, y);
-
-		if (width < height) {
-			car.setGoal (goal, y);
-		} else {
-			car.setGoal (x, goal);
-		}
-		cars.add (car);
-	}
-
 	// Spawn a car in the road
 	public boolean spawn () {
 

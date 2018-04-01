@@ -51,14 +51,8 @@ public class CrossRoad{
 		}
 	}
 
-	public void spawn (int road, int x, int y) {
-		if (road < roads.length) {
-			roads[road].spawn (x, y);
-		}
-	}
-
 	// Spawn n number of cars in a given Road by it's ID
-	public void spawn (int n, int road) {
+	public void spawn (int n, int road) {//este sí
 		if (road < roads.length) {
 			for (int i = 0; i < n; i++) {
 				roads[road].spawn ();
