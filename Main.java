@@ -39,7 +39,7 @@ public class Main {
 		state += "\n==========================================================\n";
 		state += String.format ("SEMAPHORE CURRENTLY GREEN FOR LANE %s\n", crossing2.getRoad(crossing.semaphore.activeRoad).direction);
 		state += String.format ("SEMAPHORE DURATION: %f\n", crossing2.semaphore.time);
-		state += String.format ("SEMAPHORE SCHEME: %s\n", crossing2.semaphore.currentScheme.name);
+		state += String.format ("SEMAPHORE SCHEME: %s\n", crossing2.semaphore.currentScheme.level);
 		state += String.format ("TOTAL CARS LEFT: %d\n", crossing2.getTotal());
 		for (Road road : crossing2.roads) {
 			state += String.format ("CARS IN ROAD %s:  %d\n", road.direction, road.cars.size ());
@@ -62,6 +62,7 @@ public class Main {
 		double timeCounter = 0;
 		int counter = 0;
 		double totalTime = 0;
+		File.write (currentState (false), "results.txt");
 		while (crossing2.getTotal () > 0) {
 
 			if (timeCounter >= crossing2.semaphore.time) {
@@ -85,6 +86,7 @@ public class Main {
 		System.out.println ("\nAlgorithm Ended");
 		System.out.println ("\n==========================================================");
 		System.out.format ("It took %f seconds (%f minutes) and there are %d cars left\n", totalTime, totalTime/60, crossing2.getTotal());
+		File.write (currentState (false), "results.txt");
 	}
 
 }

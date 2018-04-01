@@ -1,6 +1,5 @@
 public class Scheme{
 
-	public String name; //podria quitar esta
 	public int level;
 
 	public double minTime;

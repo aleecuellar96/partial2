@@ -6,7 +6,6 @@ public class Semaphore {
 	public ArrayList<Scheme> schemes;
 
 	public double time;
-	//public double speed;
 
 	public Scheme currentScheme;
 

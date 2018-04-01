@@ -1,7 +1,6 @@
 public class LightScheme extends Scheme {
 
 	public LightScheme () {
-		this.name = "LightScheme";
 		this.level = 0;
 		limits = new int[2];
 		limits[0] = 55;

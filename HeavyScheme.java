@@ -1,7 +1,6 @@
 public class HeavyScheme extends Scheme {
 
 	public HeavyScheme () {
-		this.name = "HeavyScheme";
 		this.level = 2;
 		limits = new int[2];
 		limits[0] = 105;

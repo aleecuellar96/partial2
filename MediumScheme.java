@@ -1,7 +1,6 @@
 public class MediumScheme extends Scheme {
 
 	public MediumScheme () {
-		this.name = "MediumScheme";
 		this.level = 1;
 		limits = new int[4];
 		limits[0] = 55;
