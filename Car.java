@@ -49,7 +49,7 @@ public class Car {
 
 			current = (Cell) open_list.min ();
 
-			if (current == null || !Main.world.map[current.x][current.y].valid) {
+			if (current == null || !Main.crossing.map[current.x][current.y].valid) {
 				return -1;
 			}
 
@@ -65,7 +65,7 @@ public class Car {
 				if (!closed_list.contains (neighbor)) {
 					neighbor.f = neighbor.g + neighbor.heuristic (goal);
 					if (!open_list.contains (neighbor)) {
-						Main.world.map[neighbor.x][neighbor.y].visited = true;
+						Main.crossing.map[neighbor.x][neighbor.y].visited = true;
 						open_list.append (neighbor);
 					} else {
 						Cell openNeighbor = ((Cell) open_list.find (neighbor));
@@ -88,9 +88,9 @@ public class Car {
 
 	public static ArrayList<Cell> neighbors(Cell c){
 		ArrayList<Cell> cells = new ArrayList<Cell>();
-		for (int i = 0; i < Main.world.height; i++){
-			for (int j = 0; j < Main.world.height; j++){
-				Cell cell = Main.world.map[i][j].copy();
+		for (int i = 0; i < Main.crossing.height; i++){
+			for (int j = 0; j < Main.crossing.height; j++){
+				Cell cell = Main.crossing.map[i][j].copy();
 				if (cell.valid){
 					if (diagonal (c, i, j)){
 						cell.g = c.g + 1.414f;
@@ -113,7 +113,7 @@ public class Car {
 		while (c.parent != null ){
 			System.out.println (c);
 			path.add (c);
-			Main.world.map[c.x][c.y].path = true;
+			Main.crossing.map[c.x][c.y].path = true;
 			c = c.parent;
 		}
 		return path;

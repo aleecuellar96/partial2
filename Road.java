@@ -72,7 +72,7 @@ public class Road {
 			Car copy = car.copy ();
 
 			System.out.print ("\rMoving Car from [" + car.current.y + ", " + car.current.x + "] (#" + i + " of "  + cars.size () + ") in the " + this.direction + " road");
-			Main.world.map[car.current.x][car.current.y].valid = true;
+			Main.crossing.map[car.current.x][car.current.y].valid = true;
 			int status = car.aStar(true);
 
 
@@ -81,11 +81,11 @@ public class Road {
 
 			if (status == -1) {
 				left.add (copy);
-				Main.world.map[copy.current.x][copy.current.y].valid = false;
+				Main.crossing.map[copy.current.x][copy.current.y].valid = false;
 				System.out.print ("\rMoved Car to [" + copy.current.y + ", " + copy.current.x + "] (#" + i + " of "  + cars.size () + ") in the " + this.direction + " road");
 			} else if (status == 0) {
 				left.add (car);
-				Main.world.map[car.current.x][car.current.y].valid = false;
+				Main.crossing.map[car.current.x][car.current.y].valid = false;
 				System.out.print ("\rMoved Car to [" + car.current.y + ", " + car.current.x + "] (#" + i + " of "  + cars.size () + ") in the " + this.direction + " road");
 			} else {
 

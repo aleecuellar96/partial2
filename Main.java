@@ -3,12 +3,12 @@ import java.util.*;
 public class Main {
 
 	// Keep only a copy of the whole world
-	public static World world;
+	public static CrossRoad crossing;
 
 	public static void main (String args[]) {
 		File.create ("results.txt");
 		//initialize world
-		CrossRoad crossing = new CrossRoad (40, 20);
+		crossing = new CrossRoad (40, 20);
 		Road north_south = new Road ("North - South", 40, 0, 19, 99);
 		north_south.setActualSize (20, 40);
 		Road west_east = new Road ("West - East", 0, 40, 99, 19);
@@ -17,10 +17,8 @@ public class Main {
 		crossing.setRoad (1, north_south);
 		crossing.spawn (517, 0);
 		crossing.spawn (202, 1);
-		world = crossing;
 
 		//semaphore
-		crossing = (CrossRoad) world;
 		LightScheme light = new LightScheme ();
 		MediumScheme medium = new MediumScheme ();
 		HeavyScheme heavy = new HeavyScheme ();
@@ -30,7 +28,6 @@ public class Main {
 		crossing.semaphore.startTime = 35;
 		crossing.semaphore.target = 0;
 		crossing.semaphore.setTimeFromTraffic (crossing.count ());
-		world = crossing;
 
 		// Print the world conditions at the start
 		System.out.println (currentState (true));
@@ -42,7 +39,7 @@ public class Main {
 		//flow (true, 550);
 
 		// Print the world conditions after car flow
-		System.out.println (world);
+		System.out.println (crossing);
 	}
 
 	/*public static void initializeWorld () {
@@ -108,21 +105,21 @@ public class Main {
 	}*/
 
 	public static String currentState (boolean unicodeMap) {
-		CrossRoad crossing = (CrossRoad) world;
+		CrossRoad crossing2 = (CrossRoad) crossing;
 		String state = "";
 
 		state += "\n==========================================================\n";
-		state += String.format ("SEMAPHORE CURRENTLY GREEN FOR LANE %s\n", crossing.getRoad(crossing.semaphore.activeRoad).direction);
-		state += String.format ("SEMAPHORE DURATION: %f\n", crossing.semaphore.time);
-		state += String.format ("SEMAPHORE SCHEME: %s\n", crossing.semaphore.currentScheme.name);
-		state += String.format ("TOTAL CARS LEFT: %d\n", crossing.count());
-		for (Road road : crossing.roads) {
+		state += String.format ("SEMAPHORE CURRENTLY GREEN FOR LANE %s\n", crossing2.getRoad(crossing.semaphore.activeRoad).direction);
+		state += String.format ("SEMAPHORE DURATION: %f\n", crossing2.semaphore.time);
+		state += String.format ("SEMAPHORE SCHEME: %s\n", crossing2.semaphore.currentScheme.name);
+		state += String.format ("TOTAL CARS LEFT: %d\n", crossing2.count());
+		for (Road road : crossing2.roads) {
 			state += String.format ("CARS IN ROAD %s:  %d\n", road.direction, road.cars.size ());
 		}
 		if (unicodeMap) {
-			state += crossing;
+			state += crossing2;
 		} else {
-			state += crossing.toFileString ();
+			state += crossing2.toFileString ();
 		}
 		state += "\n==========================================================\n";
 		return state;
@@ -133,24 +130,24 @@ public class Main {
 	// For debugging purposes it is best to use false. The second parameter
 	// stablishes how many steps should be run when the speed was slowed down.
 	public static void flow (boolean byStep, int step) {
-		CrossRoad crossing = (CrossRoad) world;
+		CrossRoad crossing2 = (CrossRoad) crossing;
 		double timeCounter = 0;
 		int counter = 0;
 		double totalTime = 0;
-		while (crossing.count () > 0) {
+		while (crossing2.count () > 0) {
 
-			if (timeCounter >= crossing.semaphore.time) {
-				crossing.semaphore.swap (crossing.count ());
+			if (timeCounter >= crossing2.semaphore.time) {
+				crossing2.semaphore.swap (crossing2.count ());
 
 				timeCounter = 0;
 				counter++;
 				System.out.println (currentState (true));
 				File.write (currentState (false), "results.txt");
 			}
-			crossing.getRoad(crossing.semaphore.activeRoad).flow ();
+			crossing2.getRoad(crossing2.semaphore.activeRoad).flow ();
 
 			if (byStep) {
-				timeCounter += crossing.semaphore.time;
+				timeCounter += crossing2.semaphore.time;
 				if (counter == step) {
 					break;
 				}
@@ -164,7 +161,7 @@ public class Main {
 		System.out.println ("\n==========================================================");
 		System.out.println ("\nAlgorithm Ended");
 		System.out.println ("\n==========================================================");
-		System.out.format ("It took %f seconds (%f minutes) and there are %d cars left\n", totalTime, totalTime/60, crossing.count ());
+		System.out.format ("It took %f seconds (%f minutes) and there are %d cars left\n", totalTime, totalTime/60, crossing2.count ());
 	}
 
 	public static void flow () {

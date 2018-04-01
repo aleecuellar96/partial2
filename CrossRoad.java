@@ -1,16 +1,20 @@
 import java.util.*;
 
-public class CrossRoad extends World {
+public class CrossRoad{
 
 	public int[] roadSize;
 
 	public Semaphore semaphore;
 	public Road[] roads;
 
+	public int width;
+	public int height;
+
+	public Cell map[][];
 
 	public CrossRoad (int columns, int rows) {
 		// Create a world with size enough for the roads and their continuations
-		super (columns * 2 + rows, columns * 2 + rows);
+		createWorld(columns * 2 + rows, columns * 2 + rows);
 
 		roadSize = new int[2];
 		roadSize[0] = columns;
@@ -22,6 +26,18 @@ public class CrossRoad extends World {
 		// Set which road has the green light first
 		semaphore.activeRoad = 1;
 		semaphore.inactiveRoad = 0;
+	}
+
+	public void createWorld (int width, int height) {
+		this.width = height;
+		this.height = width;
+		map = new Cell[this.height][this.width];
+		for (int i = 0; i < this.height; i++) {
+			for (int j = 0; j < this.width; j++) {
+				Cell cell = new Cell (i, j);
+				map[i][j] = cell;
+			}
+		}
 	}
 
 	// Trace a Road in the current map
