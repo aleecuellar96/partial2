@@ -12,9 +12,6 @@ public class Road {
 	public int width;
 	public int height;
 
-	public boolean horizontal;
-
-
 	public ArrayList<Car> cars;
 
 
@@ -125,12 +122,6 @@ public class Road {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public boolean equals (Object o) {
-		Road other = (Road) o;
-		return (this.direction.equals(other.direction));
 	}
 
 }

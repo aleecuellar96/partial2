@@ -6,11 +6,9 @@ public class Cell implements Comparable<Cell> {
 	public float f;
 	public float g;
 	public float h;
-
-	public boolean valid;
-
 	public boolean path;
 	public boolean visited;
+	public boolean valid;
 
 	public Cell (int x, int y) {
 		this.x = x;

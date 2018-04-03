@@ -14,8 +14,8 @@ public class Main {
 		west_east.setActualSize (40, 20);
 		crossing.setRoad (0, west_east);
 		crossing.setRoad (1, north_south);
-		crossing.fillLane (517, 0);
-		crossing.fillLane(202, 1);
+		crossing.fillLane (305, 0);
+		crossing.fillLane(212, 1);
 
 		LightScheme light = new LightScheme ();
 		MediumScheme medium = new MediumScheme ();
@@ -23,7 +23,6 @@ public class Main {
 		crossing.semaphore.addScheme (light);
 		crossing.semaphore.addScheme (medium);
 		crossing.semaphore.addScheme (heavy);
-		crossing.semaphore.startTime = 35;
 		crossing.semaphore.target = 0;
 		crossing.semaphore.setTimeFromTraffic (crossing.getTotal());
 

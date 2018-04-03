@@ -21,7 +21,6 @@ public class CrossRoad{
 		roads = new Road[2];
 		semaphore = new Semaphore ();
 		semaphore.activeRoad = 1;
-		semaphore.inactiveRoad = 0;
 	}
 
 	public void createWorld (int width, int height) {
@@ -37,10 +36,8 @@ public class CrossRoad{
 	}
 
 	public void fillLane (int n, int road) {
-		if (road < roads.length) {
-			for (int i = 0; i < n; i++) {
-				roads[road].fill();
-			}
+		for (int x = 0; x < n; x++) {
+			roads[road].fill();
 		}
 	}
 

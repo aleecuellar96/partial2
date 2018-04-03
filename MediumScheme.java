@@ -3,14 +3,12 @@ public class MediumScheme extends Scheme {
 	public MediumScheme () {
 		this.level = 1;
 		limits = new int[4];
-		limits[0] = 55;
-		limits[1] = 80;
-		limits[2] = 105;
-		limits[3] = 130;
-		minTime = 55;
-		maxTime = 130;
-		minCars = 586;
-		maxCars = 1386;
+		limits[0] = 74;
+		limits[1] = 82;
+		limits[2] = 113;
+		limits[3] = 121;
+		minCars = 500;
+		maxCars = 1100;
 	}
 
 	public double membership (double time) {

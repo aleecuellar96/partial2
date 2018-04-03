@@ -3,12 +3,10 @@ public class LightScheme extends Scheme {
 	public LightScheme () {
 		this.level = 0;
 		limits = new int[2];
-		limits[0] = 55;
-		limits[1] = 80;
-		minTime = 35;
-		maxTime = 80;
+		limits[0] = 74;
+		limits[1] = 82;
 		minCars = 0;
-		maxCars = 853;
+		maxCars = 600;
 	}
 
 	public double membership (double time) {

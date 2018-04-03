@@ -1,4 +1,3 @@
-//ya
 public class List {
 
 	Node root;

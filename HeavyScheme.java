@@ -3,11 +3,9 @@ public class HeavyScheme extends Scheme {
 	public HeavyScheme () {
 		this.level = 2;
 		limits = new int[2];
-		limits[0] = 105;
-		limits[1] = 130;
-		minTime = 105;
-		maxTime = 150;
-		minCars = 1120;
+		limits[0] = 113;
+		limits[1] = 121;
+		minCars = 1000;
 		maxCars = 1600;
 	}
 
