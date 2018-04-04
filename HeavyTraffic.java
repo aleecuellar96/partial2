@@ -1,6 +1,6 @@
-public class HeavyScheme extends Scheme {
+public class HeavyTraffic extends Traffic{
 
-	public HeavyScheme () {
+	public HeavyTraffic(){
 		this.level = 2;
 		limits = new int[2];
 		limits[0] = 113;
@@ -9,7 +9,7 @@ public class HeavyScheme extends Scheme {
 		maxCars = 1600;
 	}
 
-	public double membership (double time) {
+	public double membership(double time){
 		if(time > limits[1]){
 			return 1;
 		}else if(limits[0] < time && time <= limits[1]){

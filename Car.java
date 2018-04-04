@@ -1,58 +1,50 @@
 import java.util.*;
 
-public class Car {
-
-	public double speed;
-
+public class Car{
 	private List open_list;
 	private List closed_list;
 	public Cell current;
 	private Cell start;
 	private Cell goal;
 
-	public Car () {
+	public Car(){
 		open_list = new List ();
 		closed_list = new List ();
 	}
 
-	public void setStart (int x, int y) {
+	public Car copy(){
+		Car copy = new Car ();
+		copy.setStart (this.current.x, this.current.y);
+		copy.setGoal (this.goal.x, this.goal.y);
+		return copy;
+	}
+
+	public void setStart(int x, int y){
 		open_list = new List ();
 		start = new Cell (x, y);
 		start.g = 0;
 		open_list.append (start);
 		current = start;
-
 	}
 
-	public Car copy () {
-		Car clone = new Car ();
-		clone.setStart (this.current.x, this.current.y);
-		clone.setGoal (this.goal.x, this.goal.y);
-		return clone;
-	}
-
-	public void setGoal (int x, int y) {
+	public void setGoal(int x, int y){
 		goal = new Cell (x, y);
 		start.f = start.g + start.heuristic (goal);
 	}
 
-	public int aStar (boolean repeat) {
-
+	public int aStar(){
 		if (open_list.getSize () != 0) {
-
 			current = (Cell) open_list.min ();
 
 			if (current == null || !Main.crossing.map[current.x][current.y].valid) {
 				return -1;
 			}
-
 			if (current.equals (goal)) {
 				return 1;
 			}
 
 			open_list.delete (current);
 			closed_list.append (current);
-
 			ArrayList<Cell> neighbors = neighbors (current);
 			for (Cell neighbor : neighbors) {
 				if (!closed_list.contains (neighbor)) {
@@ -131,14 +123,14 @@ public class Car {
 	}
 
 	@Override
-	public boolean equals (Object o) {
+	public boolean equals(Object o) {
 		Car other = (Car) o;
 		return (this.current.equals(other.current));
 	}
 
 
 	@Override
-	public String toString () {
+	public String toString() {
 		return String.format("[" + this.current.y + "," + this.current.x + "] GOAL: " + this.goal);
 	}
 }

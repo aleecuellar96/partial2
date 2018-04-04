@@ -19,7 +19,7 @@ public class List {
 		}
 	}
 
-	public int getSize() {
+	public int getSize(){
 		int count = 1; 
 		Node current = root;
 		if(root != null){
@@ -34,7 +34,7 @@ public class List {
 		return count;
 	}
 
-	public Cell deleteFirst() {
+	public Cell deleteFirst(){
 		if (root != null) {
 			Node first = root;
 			root = root.next;
@@ -82,7 +82,7 @@ public class List {
 	}
 
 	@Override
-	public String toString() {
+	public String toString(){
 		String result = "";
 		Node current = root;
 		result += current.toString () + "\n";

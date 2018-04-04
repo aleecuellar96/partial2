@@ -1,10 +1,9 @@
 public class Node{
 
 	public Node next;
-
 	public Cell payload;
 
-	public Node (Cell payload) {
+	public Node(Cell payload){
 		this.payload = payload;
 	}
 

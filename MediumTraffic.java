@@ -1,6 +1,6 @@
-public class MediumScheme extends Scheme {
+public class MediumTraffic extends Traffic{
 
-	public MediumScheme () {
+	public MediumTraffic(){
 		this.level = 1;
 		limits = new int[4];
 		limits[0] = 74;
@@ -11,12 +11,12 @@ public class MediumScheme extends Scheme {
 		maxCars = 1100;
 	}
 
-	public double membership (double time) {
-		if (time > limits[0] && time <= limits[1]) {
+	public double membership(double time){
+		if(time > limits[0] && time <= limits[1]){
 			return (time - limits[0]) / (limits[1] - limits[0]);
-		} else if (time > limits[1]  && time < limits[2]) {
+		}else if (time > limits[1]  && time < limits[2]){
 			return 1;
-		} else if (time > limits[1] && time < limits[3]) {
+		}else if (time > limits[1] && time < limits[3]){
 			return (limits[3] - time) / (limits[3] - limits[2]);
 		}else{
 			return 0;

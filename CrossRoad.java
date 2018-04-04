@@ -1,150 +1,107 @@
 import java.util.*;
 
 public class CrossRoad{
-
-	public int[] roadSize;
-
 	public Semaphore semaphore;
-	public Road[] roads;
-
+	public Lane[] lanes;
 	public int width;
 	public int height;
-
 	public Cell map[][];
 	public int index = 0;
 
-	public CrossRoad (int columns, int rows) {
-		createWorld(columns * 2 + rows, columns * 2 + rows);
-		roadSize = new int[2];
-		roadSize[0] = columns;
-		roadSize[1] = rows;
-		roads = new Road[2];
+	public CrossRoad(){
+		createWorld(40 * 2 + 20, 40 * 2 + 20);
+		lanes = new Lane[2];
 		semaphore = new Semaphore ();
-		semaphore.activeRoad = 1;
+		semaphore.activeLane = 0;
 	}
 
-	public void createWorld (int width, int height) {
+	public void createWorld(int width, int height){
 		this.width = height;
 		this.height = width;
 		map = new Cell[this.height][this.width];
-		for (int i = 0; i < this.height; i++) {
-			for (int j = 0; j < this.width; j++) {
-				Cell cell = new Cell (i, j);
+		for(int i = 0; i < this.height; i++){
+			for(int j = 0; j < this.width; j++){
+				Cell cell = new Cell(i, j);
 				map[i][j] = cell;
 			}
 		}
 	}
 
-	public void fillLane (int n, int road) {
-		for (int x = 0; x < n; x++) {
-			roads[road].fill();
-		}
-	}
-
-	public void setRoad (int index, Road road) {
+	public void fillLane(int index, Lane lane, int n){
 		if(index == 0){
-			roads[index] = road;
-			for (int i = 0; i < this.height; i++) {
-				for (int j = 0; j < this.width; j++) {
-					if (j >= road.initialPoint[0] && j <= road.initialPoint[0] + road.width && i >= road.initialPoint[1] && i <= road.initialPoint[1] + road.height) {
+			lanes[index] = lane;
+			for(int i = 0; i < this.height; i++){
+				for(int j = 0; j < this.width; j++){
+					if(j >= lane.startFill[0] && j <= lane.startFill[0] + lane.width && i >= lane.startFill[1] && i <= lane.startFill[1] + lane.height){
 						map[i][j].valid = true;
 					}
 				}
+			}
+			for(int x = 0; x < n; x++){
+				lanes[index].fill();
 			}
 			index++;
 		}else{
-			roads[index] = road;
-			for (int i = 0; i < this.height; i++) {
-				for (int j = 0; j < this.width; j++) {
-					if (j >= road.initialPoint[0] && j <= road.initialPoint[0] + road.width && i >= road.initialPoint[1] && i <= road.initialPoint[1] + road.height) {
+			lanes[index] = lane;
+			for(int i = 0; i < this.height; i++){
+				for(int j = 0; j < this.width; j++){
+					if(j >= lane.startFill[0] && j <= lane.startFill[0] + lane.width && i >= lane.startFill[1] && i <= lane.startFill[1] + lane.height){
 						map[i][j].valid = true;
 					}
 				}
 			}
+			for(int x = 0; x < n; x++){
+				lanes[index].fill();
+			}
 		}
 	}
 
-	public Road getRoad (int index) {
-		if (index < roads.length) {
-			return roads[index];
+	public Lane getLaneIndex(int index){
+		if(index < lanes.length){
+			return lanes[index];
 		}
 		return null;
 	}
 
-	public int getTotal () {
+	public int getTotal(){
 		int count = 0;
-		for (int i = 0; i < roads.length; i++) {
-			count += roads[i].cars.size ();
+		for(int i = 0; i < lanes.length; i++){
+			count += lanes[i].cars.size();
 		}
 		return count;
 	}
 
-	public int carAt (int x, int y) {
-		for (int i = 0; i < roads.length; i++) {
-			if (roads[i] != null) {
-				for (Car car : roads[i].cars) {
-					if (car.current.x == x && car.current.y == y) {
-						return i;
-					}
+	public int carPosition(int x, int y){
+		for(int i = 0; i < lanes.length; i++){
+			for(Car car : lanes[i].cars){
+				if(car.current.x == x && car.current.y == y){
+					return i;
 				}
 			}
-
 		}
 		return -1;
 	}
 
-	public String toFileString () {
-		String result = "";
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				int road = carAt (i, j);
-				if (road == 1) {
-					result += "v";
-				} else if (road == 0) {
-					result += ">";
-				}else if (!map[i][j].valid && road == -1) {
-					result += " ";
-				} else if (!map[i][j].valid) {
-					result += " ";
-				}else  if (map[i][j].visited) {
-					result += ".";
-				} else {
-
-					result += ".";
+	public String write(){
+		String str = "";
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				int road = carPosition(i, j);
+				if(!map[i][j].valid && road == -1){
+					str += " .";
+				}else if (road == 0){
+					str += " >";
+				}else if (road == 1){
+					str += " v";
+				}else  if (map[i][j].visited){
+					str += "  ";
+				} else{
+					str += "  ";
 				}
 			}
-			result += "\n";
+			str += "\n";
 		}
-		return result;
-	}
-
-
-	public String toString () {
-		String result = ""; 
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				int road = carAt (i, j);
-
-				if (map[i][j].path) {
-					result += " \u001B[36m◎\u001B[0m ";
-				} else if (road == 1) {
-					result += " ▼ ";
-				} else if (road == 0) {
-					result += " ▶ ";
-				}else if (!map[i][j].valid && road == -1) {
-					result += "   ";
-				} else if (!map[i][j].valid) {
-					result += "   ";
-				}else  if (map[i][j].visited) {
-					result += " \u001B[35m□\u001B[0m ";
-				} else {
-
-					result += " □ ";
-				}
-			}
-			result += "\n";
-		}
-		return result;
+		return str;
 	}
 
 }

@@ -10,12 +10,10 @@ public class Cell implements Comparable<Cell> {
 	public boolean visited;
 	public boolean valid;
 
-	public Cell (int x, int y) {
+	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
-
 		parent = null;
-
 		f = 0;
 		g = 0;
 		h = 0;

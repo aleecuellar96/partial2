@@ -1,72 +1,65 @@
 import java.util.*;
-import javax.swing.JOptionPane;
 
-public class Semaphore {
+public class Semaphore{
 
-	public ArrayList<Scheme> schemes;
-
+	public ArrayList<Traffic> modes;
 	public double time;
-
-	public Scheme currentScheme;
-
+	public Traffic currentScheme;
 	public int target;
+	public int activeLane;
 
-
-	public int activeRoad;
-
-	public Semaphore () {
-		schemes = new ArrayList<Scheme> ();
+	public Semaphore (){
+		modes = new ArrayList<Traffic> ();
 	}
 
-	public void addScheme (Scheme scheme) {
-		schemes.add (scheme);
+	public void addMode(Traffic mode){
+		modes.add (mode);
 	}
 
-	public void setTime (double time) {
+	public void setTime(double time){
 		this.time = time;
 	}
 
-	public Scheme getTrafficMode(int traffic) {
-		for (Scheme scheme : schemes) {
-			if (scheme.handles (traffic)) {
+	public Traffic getTrafficMode(int traffic){
+		for (Traffic scheme : modes){
+			if (scheme.fit(traffic)){
 				return scheme;
 			}
 		}
 		return null;
 	}
 
-	public void setTimeFromTraffic (int traffic) {
-
+	public void timeTraffic(int traffic){
 		currentScheme= getTrafficMode(traffic);
 		double timeFromTraffic = Math.floor((0.078125*traffic)+35);
 
-		double scores[] = new double[schemes.size ()];
+		double scores[] = new double[modes.size ()];
 
 		double noChange = -1;
 
-		for (int i = 0; i < schemes.size (); i++) {
-			scores[i] = schemes.get(i).membership (timeFromTraffic);
-			if (i == currentScheme.level) {
+		for(int i = 0; i < modes.size (); i++){
+			scores[i] = modes.get(i).membership (timeFromTraffic);
+			if(i == currentScheme.level){
 				noChange = scores[i];
 			}
 		}
-
-		if (currentScheme.level < target) {
-			currentScheme = schemes.get (schemes.size () - 1);
-		} else if (currentScheme.level > target) {
+		if(currentScheme.level < target){
+			currentScheme = modes.get (modes.size () - 1);
+			this.time = (timeFromTraffic + currentScheme.limits[currentScheme.limits.length - 1])/2;
+		}else if(currentScheme.level > target){
 			currentScheme = getTrafficMode(traffic);
 			this.time = (timeFromTraffic + currentScheme.limits[currentScheme.limits.length - 1])/2;
-		} else {
+		}else{
 			this.time = (timeFromTraffic + currentScheme.limits[currentScheme.limits.length - 1])/2;
 		}
 	}
 
-	public void alternate (int traffic) {
-		setTimeFromTraffic (traffic);
-		if (activeRoad == 0) {
-			activeRoad = 1;
-		} else {
-			activeRoad = 0;
+	public void alternate(int traffic){
+		timeTraffic(traffic);
+		if(activeLane == 1){
+			activeLane = 0;
+		}else{
+			activeLane = 1;
 		}
 	}
 
